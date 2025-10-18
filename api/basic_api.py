@@ -19,7 +19,8 @@ def handle_response(response):
     response is 200
     """
     if response.json()['code'] == 1:
-        basic_api.logger.info(f"请求成功{response.content}")
+        #basic_api.logger.info(f"请求成功{response.content}")
+        basic_api.logger.info("请求成功")
     else:
         basic_api.logger.info(f"请求有问题{response.text}退出程序")
         showError()

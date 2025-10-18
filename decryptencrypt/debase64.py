@@ -5,7 +5,8 @@ import re
 from log.log import Log
 
 bs64 = Log("base64")
-
+data0 = ""
+result0 = ""
 
 def debase64(data: dict or str):
     """
@@ -16,7 +17,7 @@ def debase64(data: dict or str):
     if type(data) is dict:
         data = data["data"]
 
-    bs64.logger.info(f"开始解码{data}")
+    bs64.logger.info(f"开始解码{data0}")
     try:
         bs64_str = base64.b64decode(data.encode("utf-8")).decode("utf-8", errors='ignore')
     except binascii.Error as e:
@@ -32,7 +33,7 @@ def debase64(data: dict or str):
     result = re.findall("{\".*", bs64_str)[0]
     try:
         json.loads(result)
-        bs64.logger.info(f"解码成功{result}")
+        bs64.logger.info(f"解码成功{result0}")
         return json.loads(result)
     except:
         if result.startswith('{'):
@@ -40,7 +41,7 @@ def debase64(data: dict or str):
             result = re.findall("{\".*", result)[0]
             try:
                 json.loads(result)
-                bs64.logger.info(f"解码成功{result}")
+                bs64.logger.info(f"解码成功{result0}")
                 return json.loads(result)
             except:
                 bs64.logger.error("解码失败！")

@@ -28,7 +28,8 @@ def handle_response(response):
     # error_view.showUI()
     if code == 1:
         # 获取成功
-        api.logger.info(f"请求成功{response.content}")
+        #api.logger.info(f"请求成功{response.content}")
+        api.logger.info("请求成功")
     # complete exam
     elif code == 20001 and response_json['data'] or code == 20004:
         pass
@@ -222,6 +223,7 @@ def submit_result(public_info, option):
     rsp = requests.rqs2_session.post(basic_url + url, data=json.dumps(data))
     # check request is success
     handle_response(rsp)
+    api.logger.info("---------------------------------------------------------------")
     api.logger.info("提取下一题的请求参数")
     # next exam topic_code
     public_info.topic_code = debase64(rsp.json())['topic_code']
